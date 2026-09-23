@@ -1,36 +1,35 @@
 #pragma once
 #include "MvCameraControl.h"
-#include <iostream>
-#include <cstring> 
 #include <opencv2/opencv.hpp>
-#include <opencv2/core.hpp>
-#include <stdexcept>
-#include <vector>
+#include <cstring>
+#include <string>
+
 class Camera
 {
 public:
     Camera();
-    void Enumerate_Devices();
-    void Create_Handle();
-    void Open_Device();
-    void Set_Exposure_And_Gain();
-    void Set_Sync_Time_Out();
-    void Set_Transfer_Size();
-    void Set_Transfer_Ways();
-    void Set_Image_Nodenum();
-    void Start_Grabbing();
-    bool Get_Frame(cv::Mat& image);
-    void Stop_Grabbing();
-    void Close_Device();
-    void Destroy_Handle();
-    ~Camera(); 
-    std::string GenerateFileName();
+    bool initialize();
+    bool enumerate_devices();
+    bool create_handle();
+    bool open_device();
+    bool set_exposure_and_gain();
+    bool set_sync_time_out();
+    bool set_transfer_size();
+    bool set_transfer_ways();
+    bool set_image_nodenum();
+    bool start_grabbing();
+    bool get_frame(cv::Mat& image);
+    bool stop_grabbing();
+    bool close_device();
+    bool destroy_handle();
+    std::string generate_file_name() const;
+    ~Camera();
+
 private:
-    // 私有成员变量和方法
-    void* handle = nullptr; // 相机句柄，初始化为 nullptr
-    bool sdkInitialized = false;
-    bool deviceOpened = false;
+    void* handle = nullptr;
+    bool sdk_initialized = false;
+    bool device_opened = false;
     bool grabbing = false;
-    bool m_bBayerQualitySet = false;
-    MV_CC_DEVICE_INFO_LIST stDeviceList;
+    bool bayer_quality_set = false;
+    MV_CC_DEVICE_INFO_LIST device_list{};
 };

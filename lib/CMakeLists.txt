@@ -4,6 +4,7 @@ aux_source_directory(src SRC_LIST)
 # 生成动态库
 add_library(mylib SHARED ${SRC_LIST})
 
+# 找到opencv的包
 find_package(OpenCV REQUIRED)
 
 # 指定头文件路径
